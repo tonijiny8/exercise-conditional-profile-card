@@ -30,7 +30,8 @@ function render(variables = {}) {
     cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   }
 
-  const fullName = [variables.name, variables.lastName].filter(Boolean).join(" ");
+  let fullName = [variables.name, variables.lastName].filter(Boolean).join(" ");
+  if (!fullName) fullName = "Toni Jin";
   const location = [variables.city, variables.country].filter(Boolean).join(", ");
 
   let twitterLi = "";
@@ -53,16 +54,14 @@ function render(variables = {}) {
     instagramLi = `<li><a href="https://instagram.com/${variables.instagram}" target="_blank" rel="noreferrer"><i class="fab fa-instagram"></i></a></li>`;
   }
 
-  let socialHTML = "";
-  if (twitterLi || githubLi || linkedinLi || instagramLi) {
-    socialHTML = `<ul class="${variables.socialMediaPosition}">
-      ${twitterLi}
-      ${githubLi}
-      ${linkedinLi}
-      ${instagramLi}
-    </ul>`;
-  }
+  const socialHTML = `<ul class="${variables.socialMediaPosition}">
+  ${twitterLi}
+  ${githubLi}
+  ${linkedinLi}
+  ${instagramLi}
+  </ul>`;
 
+    
   document.querySelector("#widget_content").innerHTML = `
     <div class="widget">
       ${cover}
